@@ -1,0 +1,33 @@
+steps:
+  # Update environment variable for Audio Bucket name
+- name: gcr.io/cloud-builders/gcloud
+  args:
+    - beta
+    - runtime-config
+    - configs
+    - variables
+    - set
+    - AUDIO_BUCKET
+    - ${_AUDIO_BUCKET}
+    - --config-name=${_CONFIG_NAME}
+    - --is-text
+  # Update environment variable for Text Bucket name
+- name: gcr.io/cloud-builders/gcloud
+  args:
+    - beta
+    - runtime-config
+    - configs
+    - variables
+    - set
+    - TEXT_BUCKET
+    - ${_TEXT_BUCKET}
+    - --config-name=${_CONFIG_NAME}
+    - --is-text
+  # Deploy Cloud Function
+- name: gcr.io/cloud-builders/gcloud
+  args:
+    - functions
+    - deploy
+    - ${_FUNC_NAME}
+    - --stage-bucket=${_STAGE_BUCKET}
+    - --trigger-bucket=${_AUDIO_BUCKET}
