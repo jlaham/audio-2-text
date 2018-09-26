@@ -52,8 +52,8 @@ exports.audio2text = (data, context) => {
       // Codec: FLAC
       // Sample rate: 44.1 kHz
       //
-      // Future version of this code should be able to detect audio file format,
-      // or receive it from an external source
+      // Future version of this code should be able to detect audio file
+      // format, or receive it from an external source
       const encoding = 'FLAC';
       const sampleRateHertz = 44100;
       const languageCode = 'en-US';
@@ -65,7 +65,7 @@ exports.audio2text = (data, context) => {
       const config = {
         encoding: encoding,
         sampleRateHertz: sampleRateHertz,
-        languageCode: languageCode
+        languageCode: languageCode,
       };
 
       // Set audio file URI for Speech API
@@ -76,7 +76,7 @@ exports.audio2text = (data, context) => {
       // Create Speech API request object
       const request = {
         config: config,
-        audio: audio
+        audio: audio,
       };
 
       // Execute Speech API call
@@ -103,12 +103,13 @@ exports.audio2text = (data, context) => {
             .save(transcription)
             .then(() => {
               console.log(
-                `INFO: Transcribed text uploaded to gs://${textBucketName}/${fileName}`
+                `INFO: Transcribed text uploaded to
+                 gs://${textBucketName}/${fileName}`
               );
             });
         })
         .catch((err) => {
-          console.error(` Error1: ${err}`)
+          console.error(` Error1: ${err}`);
         });
     })
     .catch((err) => {
